@@ -16,6 +16,14 @@ article {
     text-align: right;
     margin: 0;
   }
+  .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title p{
+    font-weight: 800;
+  }
   
   .actions button {
     font: inherit;

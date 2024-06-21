@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { User } from '../interfaces/user.interface';
 import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { Task } from '../interfaces/task.interface';
 
 @Component({
   selector: 'app-tasks',
@@ -14,7 +15,7 @@ export class TasksComponent {
   @Input({required: true}) public userSelected?: User
   public showModalTask: boolean = false;
 
-  public tasks = [
+  public tasks: Task[] = [
     {
       id: 't1',
       userId: 'u1',
@@ -48,12 +49,33 @@ export class TasksComponent {
     return this.selectedUserTask.length > 0
   }
 
+  get lastTaskId(){
+    // Extraer los números de los IDs
+    const numerosExistentes = this.tasks.map(tarea => parseInt(tarea.id.substring(1), 10));
+    
+    // Calcular el próximo número
+    const proximoNumero = Math.max(...numerosExistentes) + 1;
+    
+    // Retornar el próximo ID
+    return `t${proximoNumero}`;
+  }
+
   public onCompleteTask(id: string){
     this.tasks = this.tasks.filter((task) => task.id !== id)
   }
 
   public onAddTask(){
     this.showModalTask = true
+  }
+
+  public onCloseModal(){
+    this.showModalTask = false
+  }
+
+  public onAddNewTask(task: Task){
+    task.userId = this.userSelected!.id
+    task.id = this.lastTaskId
+    this.tasks.push(task)
   }
 
 }

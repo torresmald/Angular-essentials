@@ -18,5 +18,5 @@
 </section>
 
 @if (showModalTask) {
-  <app-add-task />
+  <app-add-task (closeModal)="onCloseModal()" (newTask)="onAddNewTask($event)"/>
 }
