@@ -1,0 +1,22 @@
+<section id="tasks">
+  <header>
+    <h2>{{ userSelected?.name }}´s Tasks</h2>
+    <menu>
+      <button (click)="onAddTask()">Add Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    @if (userHaveTask) { @for (task of selectedUserTask; track $index) {
+    <li>
+      <app-task [task]="task" (completed)="onCompleteTask($event)" />
+    </li>
+    } } @else {
+    <h2>No task for this User</h2>
+    }
+  </ul>
+</section>
+
+@if (showModalTask) {
+  <app-add-task />
+}
