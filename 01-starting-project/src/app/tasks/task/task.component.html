@@ -6,7 +6,7 @@
       <h2>{{ task.title }}</h2>
       <p>ID: {{task.id}}</p>
     </div>
-    <time datetime="">{{ task.dueDate }}</time>
+    <time datetime="">{{ task.dueDate | date:'fullDate' }}</time>
     <p>{{ task.summary }}</p>
   <p class="actions">
     <button (click)="onCompleteTask()">Completed</button>

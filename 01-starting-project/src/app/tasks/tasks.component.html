@@ -9,7 +9,7 @@
   <ul>
     @if (userHaveTask) { @for (task of selectedUserTask; track $index) {
     <li>
-      <app-task [task]="task" (completed)="onCompleteTask($event)" />
+      <app-task [task]="task" />
     </li>
     } } @else {
     <h2>No task for this User</h2>
@@ -18,5 +18,5 @@
 </section>
 
 @if (showModalTask) {
-  <app-add-task (closeModal)="onCloseModal()" (newTask)="onAddNewTask($event)"/>
+<app-add-task (closeModal)="onCloseModal()" [userId]="userSelected?.id" />
 }

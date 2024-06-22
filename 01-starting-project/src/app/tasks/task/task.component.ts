@@ -1,21 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
 import { Task } from '../../interfaces/task.interface';
-import { User } from '../../interfaces/user.interface';
-import { CardComponent } from "../../shared/card/card.component";
+import { CardComponent } from '../../shared/card/card.component';
+import { TasksService } from '../tasks.service';
 
 @Component({
-    selector: 'app-task',
-    standalone: true,
-    templateUrl: './task.component.html',
-    styleUrl: './task.component.css',
-    imports: [CardComponent]
+  selector: 'app-task',
+  standalone: true,
+  templateUrl: './task.component.html',
+  styleUrl: './task.component.css',
+  imports: [CardComponent, CommonModule],
 })
 export class TaskComponent {
-  @Input({required: true}) public task!:Task
-  @Output() public completed: EventEmitter<string> = new EventEmitter<string>()
+  private tasksService = inject(TasksService);
+  @Input({ required: true }) public task!: Task;
 
-
-  public onCompleteTask(){
-    this.completed.emit(this.task.id)
+  public onCompleteTask() {
+    this.tasksService.onCompleteTask(this.task.id);
   }
 }
