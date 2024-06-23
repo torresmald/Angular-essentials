@@ -1,11 +1,11 @@
-import { EventEmitter, Injectable, signal } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { UserValues } from '../interfaces/user-values.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultsService {
-  public resultsData = signal<any>([]);
+  public resultsData?: any;
   constructor() {}
 
 
@@ -30,6 +30,6 @@ export class ResultsService {
         totalAmountInvested: initial + annual * year,
       });
     }
-    this.resultsData?.set(annualData)
+    this.resultsData = annualData
   }
 }
