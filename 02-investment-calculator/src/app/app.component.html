@@ -1,4 +1,4 @@
 
 <app-header />
-<app-user-input />
-<app-results />
+<app-user-input (showResults)="changeShow()" />
+<app-results [showResults]="showResults" [results]="results"/>
