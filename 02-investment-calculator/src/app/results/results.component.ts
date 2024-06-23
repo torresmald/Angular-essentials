@@ -10,7 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './results.component.css'
 })
 export class ResultsComponent {
-  @Input() public showResults?: boolean
-  @Input() public results?: any
-  
+
+  private resultsService = inject(ResultsService)
+
+  get results(){
+    return this.resultsService.resultsData
+  }
 }

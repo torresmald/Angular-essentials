@@ -17,7 +17,6 @@ export class UserInputComponent {
   public duration: number = 0
 
   private resultsService = inject(ResultsService)
-  @Output() showResults = new EventEmitter()
 
   public onSubmit(){
     const values: UserValues = {
@@ -26,7 +25,6 @@ export class UserInputComponent {
       expected: this.expected,
       duration: this.duration
     }
-    this.resultsService.setValues(values)
-    this.showResults.emit(true)
+    this.resultsService.calculateInvestmentResults(values)
   }
 }

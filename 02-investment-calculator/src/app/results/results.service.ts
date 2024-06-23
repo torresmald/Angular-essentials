@@ -1,26 +1,19 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, signal } from '@angular/core';
 import { UserValues } from '../interfaces/user-values.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultsService {
-  private userValues?: UserValues;
-  public resultsData?: any;
+  public resultsData = signal<any>([]);
   constructor() {}
 
-  get values() {
-    return this.userValues;
-  }
 
-  public setValues(values: UserValues) {
-    this.userValues = values;
-    this.resultsData = this.calculateInvestmentResults();
-  }
 
-  public calculateInvestmentResults() {
+
+  public calculateInvestmentResults(values: UserValues) {    
     const annualData = [];
-    const { initial, duration, expected, annual } = this.userValues!;
+    const { initial, duration, expected, annual } = values!;
     let investmentValue = initial;
 
     for (let i = 0; i < duration; i++) {
@@ -37,7 +30,6 @@ export class ResultsService {
         totalAmountInvested: initial + annual * year,
       });
     }
-    console.log(annualData);
-    return annualData;
+    this.resultsData?.set(annualData)
   }
 }
