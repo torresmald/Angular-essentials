@@ -1,1 +1,14 @@
+<div>
+  <ul>
+    @for (ticket of allTickets; track ticket.id) {
+    <li>
+      <app-ticket [ticket]="ticket" />
+    </li>
+    } @empty {
+      <p>No tickets yet!!</p>
+    }
+  </ul>
+</div>
+<div id="new-ticket">
   <app-new-ticket />
+</div>

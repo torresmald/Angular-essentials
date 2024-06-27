@@ -29,6 +29,11 @@
 @media (min-width: 768px) {
   :host {
     flex-direction: row;
+    flex-wrap: wrap;
   }
+}
+
+#new-ticket {
+  width: 15rem;
 }
 
